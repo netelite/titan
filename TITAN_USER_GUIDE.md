@@ -1,8 +1,8 @@
-# TITAN v1.1 — USER Guide
+# TITAN v1.2 — USER Guide
 
 This file is for the human project owner.
 
-TITAN targets experienced Codex/model users managing medium and large web applications.
+TITAN targets experienced AI-assisted development users managing medium and large web applications.
 
 ## Version 1.0.2 operating changes
 
@@ -28,7 +28,7 @@ TITAN_USER_GUIDE.md
 docs/
 ```
 
-Then open the repository in Codex.
+Then open the repository in a supported AI coding environment.
 
 ## 2. First message
 
@@ -77,7 +77,7 @@ Continue according to TITAN.
 
 SOL inspects the actual repository and creates a detailed plan in `docs/plans/`.
 
-When SOL changes state to `LUNA_IMPLEMENTER`, switch to LUNA and say:
+When STATE changes to `LUNA_IMPLEMENTER`, continue as the TITAN role specified by STATE and say:
 
 ```text
 Continue according to the active plan.
@@ -95,7 +95,7 @@ No new SOL planning is needed unless the plan or real project state changed.
 
 ## 5. When LUNA reports a blocker
 
-Switch to SOL.
+Continue as the reasoning/review role specified by STATE.
 
 Say:
 
@@ -143,7 +143,7 @@ LUNA can implement many UI tasks directly when intent is sufficiently clear.
 
 Local PASS is not production verification.
 
-Before deployment, switch to SOL and say:
+Before deployment, continue as the SOL role specified by STATE and say:
 
 ```text
 Prepare the production deployment according to TITAN for the current
@@ -174,4 +174,14 @@ TITAN v1.0 is not:
 - permission for an AI model to make destructive production changes without approval;
 - a guarantee that every project should use the same software architecture.
 
-TITAN is a **development methodology encoded into the repository** so Codex collaboration remains consistent across sessions and GPT models.
+### Roles and models
+
+| TITAN Role | Responsibility | Typical Model Capability |
+| --- | --- | --- |
+| SOL | reasoning, architecture, planning, complex debugging, review | stronger reasoning |
+| LUNA | implementation of prepared plans | efficient coding / implementation |
+| ASTRA | independent challenge / critical review | strong independent reasoning |
+
+Commercial model names may change over time. TITAN role names are durable workflow concepts: role transition is mandatory, while model transition is optional. STATE controls roles; model choice is an implementation detail.
+
+TITAN is a **development methodology encoded into the repository** so Codex, GitHub Copilot, and other supported AI coding environments remain consistent across sessions and model choices.

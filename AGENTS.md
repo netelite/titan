@@ -1,21 +1,21 @@
-# TITAN v1.1 — Codex Project Instructions
+# TITAN v1.2 — AI-Assisted Project Instructions
 
-This repository uses **TITAN — Technical Intelligence, Tasking & AI Navigation**, a Codex development methodology for collaboration between:
+This repository uses **TITAN — Technical Intelligence, Tasking & AI Navigation**, a provider-neutral development methodology for collaboration between USER and capable repository-aware AI coding environments, including Codex and GitHub Copilot:
 
 - USER — product owner and final decision maker;
 - SOL — discovery, architecture, planning, review, complex debugging, and deployment planning;
 - ASTRA — optional critical/challenge reviewer for unusually complex or risky decisions;
-- LUNA — primary implementation model for well-prepared work;
-- weaker GPT implementation models — only for low-risk, tightly specified tasks.
+- LUNA — implementation responsibility for well-prepared work;
+- ASTRA — optional independent critical/challenge review responsibility.
 
 ## Mandatory startup sequence
 
 Before doing substantive work in this repository:
 
-1. Read `TITAN_START_HERE.md`.
-2. Read `.titan/STATE.md`.
-3. Read `.titan/WORKFLOW.md` only as much as needed to understand the current phase.
-4. Read the role file indicated by `EXPECTED_ROLE` in `.titan/STATE.md`.
+1. Read `AGENTS.md`.
+2. Read `TITAN_START_HERE.md`.
+3. Read `.titan/STATE.md`.
+4. Determine `EXPECTED_ROLE` and read the relevant role file.
 5. Read the phase/task-specific documents listed in `READ_NEXT`.
 6. Inspect the real repository/code before making technical claims or implementation plans.
 
@@ -40,11 +40,11 @@ Project facts come from the **current code and approved project documents**, not
 
 ## Core collaboration rule
 
-TITAN targets experienced Codex/model users building medium and large web applications. Plan size follows the task within that project; SHORT plans do not remove strategic gates.
+TITAN targets experienced AI-assisted development users building medium and large web applications. Plan size follows the task within that project; SHORT plans do not remove strategic gates.
 
 **SOL prepares; LUNA executes.**
 
-SOL should prepare implementation work so clearly that LUNA or a weaker GPT coding model can mostly execute rather than invent architecture, infer hidden intent, or make major technical decisions.
+SOL should prepare implementation work so clearly that the LUNA implementation role can mostly execute rather than invent architecture, infer hidden intent, or make major technical decisions.
 
 During architecture, implementation planning, plan review, and other non-implementation SOL work, application/source code and application tests are read-only. SOL may inspect/search the repository, inspect existing implementation and configuration, run existing non-destructive baseline checks/tests, reason about the expected change, and update TITAN planning/state/documentation files required by the workflow.
 
@@ -70,17 +70,23 @@ The following transitions require USER approval unless the USER explicitly deleg
 
 Models may prepare the next artifact before approval when asked, but must not represent an unapproved artifact as baselined.
 
-## Model switching
+## Role and model switching
 
-TITAN does **not** automatically switch models.
+TITAN role transitions are mandatory; model switching is optional.
 
-When work should move to another role/model:
+When work should move to another role:
 
-1. update `.titan/STATE.md` with `EXPECTED_ROLE` and `NEXT_ACTION`;
+1. update `.titan/STATE.md` with `EXPECTED_ROLE`, `ROLE_CAPABILITY`, and `NEXT_ACTION`;
 2. report the handoff clearly;
-3. stop if the next step specifically requires another model.
+3. stop if the current role is no longer authorized to perform the next action.
 
-The USER performs the actual model switch in Codex.
+Suggested capability mapping:
+
+- SOL → `REASONING`
+- LUNA → `IMPLEMENTATION`
+- ASTRA → `CRITICAL_REVIEW`
+
+A stronger reasoning model may be useful for SOL, an efficient coding model for LUNA, and an independent strong reasoning model for ASTRA. Copilot may keep the current selected model and assume the new TITAN role. Workflow correctness is determined by TITAN role and state, not by commercial model name.
 
 ## State discipline
 

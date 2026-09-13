@@ -22,6 +22,7 @@ const targetRoot = process.cwd();
 
 const titanFiles = [
     'AGENTS.md',
+    '.github',
     'TITAN_START_HERE.md',
     'TITAN_USER_GUIDE.md',
     'TITAN_VERSION.md',
@@ -153,8 +154,8 @@ console.log('');
 console.log(BOLD + WHITE + 'Next steps' + RESET);
 console.log('');
 
-console.log(`  ${CYAN}1.${RESET} Open this directory in Codex`);
-console.log(`  ${CYAN_2}2.${RESET} Select SOL`);
+console.log(`  ${CYAN}1.${RESET} Open this directory in Codex, GitHub Copilot, or another supported AI coding environment`);
+console.log(`  ${CYAN_2}2.${RESET} Allow TITAN to determine the initial role from .titan/STATE.md`);
 console.log(`  ${TEAL}3.${RESET} Start with:`);
 console.log('');
 

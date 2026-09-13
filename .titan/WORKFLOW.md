@@ -169,6 +169,7 @@ State should become approximately:
 
 ```text
 EXPECTED_ROLE: SOL_PLANNER
+ROLE_CAPABILITY: REASONING
 ACTIVE_MODULE: PHASE-XX ...
 ACTIVE_PLAN: NONE
 NEXT_ACTION: Inspect current repository and create a just-in-time implementation plan.
@@ -216,10 +217,11 @@ After plan creation:
 
 - mark the plan `READY` only after the readiness conditions above are met;
 - set `EXPECTED_ROLE: LUNA_IMPLEMENTER`;
+- set `ROLE_CAPABILITY: IMPLEMENTATION`;
 - set `ACTIVE_PLAN`;
 - set `NEXT_ACTION` to the first step/checkpoint.
 
-The USER performs the actual model switch.
+The TITAN role transition is mandatory. Switching the underlying model is optional; the current AI environment may continue using the same model if it can correctly perform the new TITAN role.
 
 ## Step C — LUNA implements
 
@@ -239,6 +241,7 @@ If a material conflict appears:
 - set `PHASE_STATUS: BLOCKED`;
 - describe the blocker;
 - set `EXPECTED_ROLE: SOL_REVIEWER`;
+- set `ROLE_CAPABILITY: REASONING`;
 - stop.
 
 ## Step D — STOP checkpoint
@@ -294,6 +297,24 @@ When acceptance criteria and required review are satisfied:
 
 `.titan/STATE.md` navigates; the active plan owns detailed execution evidence. Update both at meaningful transitions, not after every edit. Keep `READ_NEXT` limited to the next role, relevant prompt, active plan, and necessary project sources. Keep completed plans as evidence after clearing `ACTIVE_PLAN`.
 
+Role capability examples:
+
+```text
+EXPECTED_ROLE: SOL_PLANNER
+ROLE_CAPABILITY: REASONING
+
+EXPECTED_ROLE: LUNA_IMPLEMENTER
+ROLE_CAPABILITY: IMPLEMENTATION
+
+EXPECTED_ROLE: SOL_REVIEWER
+ROLE_CAPABILITY: REASONING
+
+EXPECTED_ROLE: ASTRA_CRITICAL_REVIEW
+ROLE_CAPABILITY: CRITICAL_REVIEW
+```
+
+The TITAN role transition is mandatory. Model switching is optional; the current AI environment may continue using the same underlying model when it can correctly perform the new role.
+
 State field vocabulary:
 
 - `PHASE_STATUS`: READY, IN_PROGRESS, WAITING, BLOCKED, COMPLETE (status of the current phase, not an individual plan).
@@ -303,13 +324,13 @@ State field vocabulary:
 
 | Event | Plan status | State / next action |
 | --- | --- | --- |
-| SOL hands off a ready plan | READY | Phase IN_PROGRESS; LUNA_IMPLEMENTER; waiting NONE; gate NONE; execute first allowed step. |
-| LUNA starts or resumes | IN_PROGRESS | Waiting NONE; gate NONE; execute next allowed step. |
-| Planned STOP with checks passed | IN_PROGRESS | Phase WAITING; LUNA_IMPLEMENTER; USER_APPROVAL; PLAN_STOP; name completed checkpoint and next step. |
+| SOL hands off a ready plan | READY | Phase IN_PROGRESS; LUNA_IMPLEMENTER / IMPLEMENTATION; waiting NONE; gate NONE; execute first allowed step. |
+| LUNA starts or resumes | IN_PROGRESS | IMPLEMENTATION; waiting NONE; gate NONE; execute next allowed step. |
+| Planned STOP with checks passed | IN_PROGRESS | Phase WAITING; LUNA_IMPLEMENTER / IMPLEMENTATION; USER_APPROVAL; PLAN_STOP; name completed checkpoint and next step. |
 | USER approves that STOP | IN_PROGRESS | Phase IN_PROGRESS; waiting NONE; gate NONE; continue without replanning unless materially changed. |
-| Material conflict | BLOCKED | Phase BLOCKED; SOL_REVIEWER; SOL_DECISION; describe conflict and required decision; preserve any unresolved gate. |
+| Material conflict | BLOCKED | Phase BLOCKED; SOL_REVIEWER / REASONING; SOL_DECISION; describe conflict and required decision; preserve any unresolved gate. |
 | Required check cannot run | BLOCKED | Phase BLOCKED; EXTERNAL_PREREQUISITE (or SOL_DECISION if a plan decision is needed); record NOT_RUN, cause, consequence, and resume action. |
-| Implementation and checks pass; review required | IMPLEMENTED | Phase WAITING; SOL_REVIEWER; SOL_REVIEW; retain active plan and request review. |
+| Implementation and checks pass; review required | IMPLEMENTED | Phase WAITING; SOL_REVIEWER / REASONING; SOL_REVIEW; retain active plan and request review. |
 | SOL returns PASS / PASS_WITH_NOTES | ACCEPTED if criteria and gates are satisfied | Record non-blocking notes; close the plan/module as applicable. Notes cannot disguise failed or missing required checks. |
 | SOL returns REPAIR_REQUIRED | BLOCKED until repair is READY | SOL amends the active plan with repair steps and checks, then hands it back READY to LUNA. Preserve completed evidence and require re-review. |
 | SOL returns SOL_TAKEOVER | IN_PROGRESS after the role/task transition is recorded | Before any application code change, move from SOL_REVIEWER to SOL_DEBUGGER (or another explicitly assigned SOL repair/implementation role), set waiting NONE, and record the bounded repair and required verification. SOL may then modify and test application code within that scope. Existing review requirements remain. |

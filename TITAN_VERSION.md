@@ -1,17 +1,32 @@
 # TITAN
 
 NAME: Technical Intelligence, Tasking & AI Navigation  
-VERSION: 1.1.0
+VERSION: 1.2.0
 DEVELOPED_BY: NETELITE
 STATUS: Released
-TARGET: OpenAI Codex workflows  
+RELEASE_NAME: Copilot Compatibility
+TARGET: Codex, GitHub Copilot, and other capable AI coding environments
 PRIMARY_FLOW: USER → SOL → LUNA  
 OPTIONAL_CRITICAL_REVIEW: ASTRA  
-OPTIONAL_IMPLEMENTATION: weaker GPT models for low-risk, tightly specified work
+OPTIONAL_IMPLEMENTATION: model choice is optional; TITAN roles remain provider-neutral
 
 Core principle:
 
 > Strong reasoning prepares the work; the implementation model executes a clear, current, testable plan.
+
+## 1.2.0 changes — Copilot Compatibility
+
+- First-class GitHub Copilot repository instructions in `.github/copilot-instructions.md`.
+- Provider-neutral TITAN roles and role capability tracking.
+- Model switching is optional; Codex compatibility is preserved.
+- **SOL prepares; LUNA executes** remains the core rule.
+- The initializer now includes `.github`.
+
+Compatibility notes:
+
+- Existing TITAN projects should merge methodology changes rather than overwrite populated state/spec/project documents.
+- v1.2 does not require custom Copilot agents.
+- Role names are stable methodology concepts independent of commercial model names.
 
 ## 1.1.0 changes
 
@@ -28,6 +43,6 @@ Core principle:
 - Persistent discovery summaries in PROJECT_INTAKE.
 - STANDARD and SHORT plans for proportionate work within medium/large projects.
 - Acceptance criteria linked to actual PASS / FAIL / NOT_RUN evidence.
-- Clarified audience: experienced Codex users building medium and large web applications.
+- Clarified audience: experienced AI-assisted development users building medium and large web applications.
 
 Existing projects: merge methodology changes without replacing populated STATE, intake, specifications, or active plans. Add readiness/review/evidence fields to active plans before resuming. The initializer remains for fresh installation and refuses existing target paths.

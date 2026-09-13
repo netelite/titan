@@ -4,24 +4,24 @@
 
 **Developed by NETELITE**
 
-**TITAN** is a Codex-native software development methodology for working with **ASTRA, SOL, LUNA, and weaker GPT coding models** inside a structured project workflow.
+**TITAN** is a provider-neutral software development methodology with first-class support for Codex and GitHub Copilot, plus other capable AI coding environments, inside a structured project workflow.
 
 Its purpose is simple:
 
-TITAN is intended for experienced Codex and model users building medium and large web applications, with controlled progress across sessions and model handoffs.
+TITAN is intended for experienced AI-assisted development users building medium and large web applications, with controlled progress across AI coding sessions and role handoffs.
 
 > Use stronger reasoning where decisions matter, then hand clearly prepared work to efficient implementation models.
 
-TITAN keeps the methodology **inside the repository** so Codex sessions can quickly understand:
+TITAN keeps the methodology **inside the repository** so AI coding sessions can quickly understand:
 
 - where the project currently is;
-- which model/role should work next;
+- which TITAN role should work next;
 - which documents must be read;
 - which implementation plan is active;
 - when a model must stop instead of improvising;
 - when review, debugging, deployment, or human approval is required.
 
-TITAN is designed specifically for a Codex workflow built around ASTRA, SOL, LUNA, and weaker GPT models. It is not intended to be a generic methodology for unrelated AI ecosystems.
+TITAN provides first-class support for Codex and GitHub Copilot while remaining independent of commercial model names.
 
 ---
 
@@ -81,10 +81,10 @@ TITAN addresses these problems through explicit roles, repository state, gated p
 
 ---
 
-## Model responsibilities
+## TITAN roles
 
 ### SOL
-Primary reasoning model for:
+Reasoning role for:
 
 - discovery;
 - requirements clarification;
@@ -95,7 +95,7 @@ Primary reasoning model for:
 - deployment planning.
 
 ### LUNA
-Primary implementation model for:
+Implementation role for:
 
 - well-defined feature implementation;
 - CRUD;
@@ -114,13 +114,9 @@ Optional critical reviewer for:
 - high-risk data/security decisions;
 - expensive-to-reverse choices.
 
-### Weaker GPT models
-May be used only when the task is:
+### Choosing AI models
 
-- tightly specified;
-- low risk;
-- easy to verify;
-- free of important architectural decisions.
+SOL generally benefits from stronger reasoning, LUNA can use efficient implementation-focused models, and ASTRA benefits from independent high-quality reasoning. These are recommendations, not hardcoded identities; TITAN state controls roles and model choice is an implementation detail.
 
 ---
 
@@ -130,6 +126,8 @@ May be used only when the task is:
 TITAN/
 │
 ├── AGENTS.md
+├── .github/
+│   └── copilot-instructions.md
 ├── README.md
 ├── LICENSE
 ├── TITAN_START_HERE.md
@@ -203,8 +201,8 @@ TITAN adds its methodology files directly to the current directory. It is not in
 
 Then:
 
-1. Open the project directory in Codex.
-2. Select **SOL**.
+1. Open the project directory in Codex, GitHub Copilot, or another supported AI coding environment.
+2. Allow TITAN to determine the initial role from `.titan/STATE.md`.
 3. Start with:
 
 ```text
@@ -237,8 +235,8 @@ In normal use, short instructions should often be enough:
 Continue according to TITAN.
 Continue according to the active plan.
 Approved. Continue.
-I switched to LUNA. Continue according to the active plan.
-I switched to SOL. Review the blocker according to TITAN.
+Continue as the role specified by TITAN.
+Review the blocker according to TITAN.
 Move to the next module according to the Master Plan.
 ```
 
@@ -246,11 +244,11 @@ The repository should carry the detailed process.
 
 ---
 
-## Important limitation
+## Roles and model selection
 
-TITAN does **not** automatically switch models.
+Role transitions are mandatory; model switching is optional. `.titan/STATE.md` declares `EXPECTED_ROLE` and `ROLE_CAPABILITY`, and the active AI environment should assume that role. Users may switch models when beneficial, but commercial model names are not part of TITAN methodology.
 
-`.titan/STATE.md` declares the expected role/model and next action. The USER performs the actual model switch in Codex.
+GitHub Copilot reads `.github/copilot-instructions.md`, which points it to `AGENTS.md` and the TITAN state.
 
 ---
 
@@ -264,8 +262,8 @@ A special thank you to AlenM for being there throughout the journey and for the 
 
 ## Status
 
-**TITAN v1.1.0** is the current release.
+**TITAN v1.2.0** is the current release.
 
-Version 1.1.0 formalizes application-code-read-only SOL planning/review roles, explicit debugging/repair/takeover transitions, and the SOL → LUNA plan-detail boundary. See `TITAN_VERSION.md` for the current changes and existing-project migration guidance.
+Version 1.2.0 adds first-class GitHub Copilot repository instructions, provider-neutral TITAN roles, role capability tracking, and optional model switching while preserving Codex compatibility and the existing methodology. See `TITAN_VERSION.md` for current changes and existing-project migration guidance.
 
 The methodology should evolve from real project evidence, not from theoretical complexity.

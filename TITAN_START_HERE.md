@@ -1,16 +1,16 @@
-# TITAN v1.1 — Start Here
+# TITAN v1.2 — Start Here
 
 ## What is TITAN?
 
-TITAN is a repository-native development methodology for building software in Codex with USER + SOL + LUNA, with optional ASTRA critical review and optional use of weaker GPT implementation models developed by **NETELITE**.
+TITAN is a provider-neutral, repository-native development methodology for building software with Codex, GitHub Copilot, or other repository-aware AI coding agents, with USER + SOL + LUNA and optional ASTRA critical review. It was developed by **NETELITE**.
 
 The goal is not to create a complicated autonomous multi-agent system.
 
-The goal is for the **repository itself to carry the operating rules, current state, decisions, and next action**, so a new Codex session or a different GPT model can continue without the USER repeatedly reconstructing project context.
+The goal is for the **repository itself to carry the operating rules, current state, decisions, and next action**, so a new AI coding session or a different capable model can continue without the USER repeatedly reconstructing project context.
 
 ## Central philosophy
 
-Designed for experienced Codex/model users developing medium and large web applications. Standard and short task plans share the same control rules; choose their size according to task risk and complexity.
+Designed for experienced AI-assisted development users developing medium and large web applications. Standard and short task plans share the same control rules; choose their size according to task risk and complexity.
 
 > Brainstorm broadly.  
 > Decide precisely.  
@@ -68,7 +68,7 @@ Open `.titan/STATE.md`.
 It tells you:
 
 - the current phase;
-- which role/model should work next;
+- which TITAN role should work next;
 - the active module;
 - whether an active plan exists;
 - what must be read next;
@@ -81,22 +81,23 @@ It tells you:
 Owns business intent, priorities, scope, UX preferences, and final decisions.
 
 ### SOL
-Handles discovery, specification, architecture, implementation planning for LUNA, review, debugging, and deployment planning.
+TITAN reasoning role for discovery, specification, architecture, implementation planning, review, debugging, and deployment planning.
 
 ### LUNA
-Primary implementer of clearly prepared plans. LUNA should not act as architect when the plan already locks the important decisions.
+TITAN implementation role for clearly prepared plans. LUNA should not act as architect when the plan already locks the important decisions.
 
 ### ASTRA
 Optional independent critical review when the project or decision is sufficiently complex or risky that additional reasoning has real value.
 
-## Model selection is not automatic
+## Role selection and model selection
 
-`STATE.md` declares the **EXPECTED_ROLE**. The USER selects the corresponding model in Codex.
+`.titan/STATE.md` declares the **EXPECTED_ROLE** and `ROLE_CAPABILITY` indicates the type of work required. The AI environment should assume that TITAN role. Switching the underlying model is optional; the USER may choose a different model when beneficial.
 
 Example:
 
 ```text
 EXPECTED_ROLE: SOL_PLANNER
+ROLE_CAPABILITY: REASONING
 NEXT_ACTION: Create a detailed plan for PHASE-04.
 ```
 
@@ -106,11 +107,12 @@ SOL marks the plan READY and specifies review requirements and concrete acceptan
 
 ```text
 EXPECTED_ROLE: LUNA_IMPLEMENTER
+ROLE_CAPABILITY: IMPLEMENTATION
 ACTIVE_PLAN: docs/plans/<CURRENT_MODULE_PLAN>.md
 NEXT_ACTION: Implement STEP A.
 ```
 
-The USER then switches to LUNA and may simply say:
+The USER may continue with the role specified by TITAN and may simply say:
 
 > Continue according to TITAN.
 
@@ -121,11 +123,11 @@ In normal use, these should often be enough:
 - `Start the project according to TITAN.`
 - `Continue according to TITAN.`
 - `Approved. Continue.`
-- `I switched to LUNA. Continue according to the active plan.`
-- `I switched to SOL. Review the blocker/review according to TITAN.`
+- `Continue as the role specified by TITAN.`
+- `Review the blocker according to TITAN.`
 - `Move to the next module according to the Master Plan.`
 
-The model should retrieve the detailed procedure from the repository.
+The AI environment should retrieve the detailed procedure from the repository.
 
 ## Source of truth
 
